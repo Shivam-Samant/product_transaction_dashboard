@@ -1,5 +1,7 @@
 # Product Transaction Dashboard
 
+This project comprises a backend API and frontend application. The backend initializes a database from a third-party API, provides transaction-related endpoints, and computes statistics, charts, and combined data. The frontend visualizes transactions, statistics, and charts with a user-friendly interface, offering functionalities like search, pagination, and month filter.
+
 # Project Screenshots
 
 <img width="978" alt="image" src="https://github.com/Shivam-Samant/product_transaction_dashboard/assets/91321534/7089eb55-e504-4f93-90f5-1435730b1b0c">
