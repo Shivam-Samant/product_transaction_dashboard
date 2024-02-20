@@ -161,14 +161,16 @@ const TransactionList = ({
                     </TableCell>
                     <TableCell>{transaction.title}</TableCell>
                     <TableCell>
-                      <Typography sx={{
-                        display: '-webkit-box',
-                        overflow: 'hidden',
-                        '-webkit-line-clamp': '3',
-                        '-webkit-box-orient': 'vertical',
-                        textOverflow: 'ellipsis',
-                      }}>
-                      {transaction.description}
+                      <Typography
+                        sx={{
+                          display: '-webkit-box',
+                          overflow: 'hidden',
+                          '-webkit-line-clamp': '3',
+                          '-webkit-box-orient': 'vertical',
+                          textOverflow: 'ellipsis',
+                        }}
+                      >
+                        {transaction.description}
                       </Typography>
                     </TableCell>
                     <TableCell>

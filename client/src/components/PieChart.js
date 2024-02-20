@@ -9,10 +9,11 @@ const PieChart = ({ pieChartData }) => {
       const transformedData = pieChartData.map((data, idx) => ({
         id: idx,
         value: data.count,
-        label: (data.category).toLowerCase()
-        .split(' ')
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' '),
+        label: data.category
+          .toLowerCase()
+          .split(' ')
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' '),
       }))
       setChartData(transformedData)
     }

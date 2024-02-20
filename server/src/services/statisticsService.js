@@ -1,9 +1,9 @@
-const Product = require('../models/productModel')
+const ProductTransaction = require('../models/productTransactionModel')
 
 async function getMonthlyStatistics(month) {
   const [totalSaleAmountResult, totalSoldItems, totalUnSoldItems] =
     await Promise.all([
-      Product.aggregate([
+      ProductTransaction.aggregate([
         {
           $match: {
             $expr: { $eq: [{ $month: '$dateOfSale' }, parseInt(month)] },
@@ -17,11 +17,11 @@ async function getMonthlyStatistics(month) {
           },
         },
       ]),
-      Product.countDocuments({
+      ProductTransaction.countDocuments({
         $expr: { $eq: [{ $month: '$dateOfSale' }, month] },
         sold: true,
       }),
-      Product.countDocuments({
+      ProductTransaction.countDocuments({
         $expr: { $eq: [{ $month: '$dateOfSale' }, month] },
         sold: false,
       }),
@@ -49,7 +49,7 @@ async function getBarChartData(month) {
 
   const barChartData = await Promise.all(
     priceRanges.map(async ({ min, max }) => {
-      const count = await Product.countDocuments({
+      const count = await ProductTransaction.countDocuments({
         $expr: {
           $eq: [{ $month: '$dateOfSale' }, month],
         },
@@ -64,7 +64,7 @@ async function getBarChartData(month) {
 }
 
 async function getPieChartData(month) {
-  const pieChartData = await Product.aggregate([
+  const pieChartData = await ProductTransaction.aggregate([
     {
       $match: {
         $expr: { $eq: [{ $month: '$dateOfSale' }, month] },

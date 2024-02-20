@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const productSchema = new mongoose.Schema({
+const productTransactionSchema = new mongoose.Schema({
   id: {
     type: Number,
     required: true,
@@ -36,6 +36,9 @@ const productSchema = new mongoose.Schema({
   },
 })
 
-const Product = mongoose.model('Product', productSchema)
+const ProductTransaction = mongoose.model(
+  'ProductTransaction',
+  productTransactionSchema,
+)
 
-module.exports = Product
+module.exports = ProductTransaction

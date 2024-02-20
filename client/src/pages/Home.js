@@ -71,7 +71,8 @@ const Home = () => {
             justifyContent: 'center',
             alignItems: 'center',
             mt: -4,
-            background: 'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)',
+            background:
+              'linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)',
           }}
         >
           <Typography
@@ -118,7 +119,7 @@ const Home = () => {
               component="h1"
               sx={{ mb: 4, color: '#00302d' }}
             >
-              Statistics - {constants.MONTH_NAMES[month-1]}
+              Statistics - {constants.MONTH_NAMES[month - 1]}
             </Typography>
             <StatisticsBox statisticsData={statisticsData} />
           </Box>
@@ -132,7 +133,7 @@ const Home = () => {
                 component="span"
                 sx={{ color: '#00302d' }}
               >
-                Bar Chart Stats - {constants.MONTH_NAMES[month-1]}
+                Bar Chart Stats - {constants.MONTH_NAMES[month - 1]}
               </Typography>
               <Typography
                 variant="h5"
@@ -153,7 +154,7 @@ const Home = () => {
               component="span"
               sx={{ mb: 4, color: '#00302d' }}
             >
-              Pie Chart Stats - {constants.MONTH_NAMES[month-1]}
+              Pie Chart Stats - {constants.MONTH_NAMES[month - 1]}
             </Typography>
             <Typography
               variant="h5"

@@ -1,10 +1,12 @@
-const productService = require('../services/productService')
+const productTransactionService = require('../services/productTransactionService')
 
 const initProducts = async (req, res) => {
   try {
     const apiUrl =
       'https://s3.amazonaws.com/roxiler.com/product_transaction.json'
-    await productService.initializeDatabaseWithSeedData(apiUrl)
+
+    await productTransactionService.initializeDatabaseWithSeedData(apiUrl)
+
     res.status(200).json({ message: 'Database initialized with seed data.' })
   } catch (error) {
     console.error(`Error handling request: ${error.message}`)

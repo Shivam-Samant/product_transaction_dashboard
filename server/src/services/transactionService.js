@@ -1,4 +1,4 @@
-const Product = require('../models/productModel')
+const ProductTransaction = require('../models/productTransactionModel')
 
 async function getAllTransactions(searchText, month, page, perPage) {
   let query = {}
@@ -13,7 +13,7 @@ async function getAllTransactions(searchText, month, page, perPage) {
         $or: [
           { title: { $regex: searchText, $options: 'i' } },
           { description: { $regex: searchText, $options: 'i' } },
-        ]
+        ],
       }
     }
   }
@@ -22,8 +22,8 @@ async function getAllTransactions(searchText, month, page, perPage) {
     query.$expr = { $eq: [{ $month: '$dateOfSale' }, parseInt(month)] }
   }
 
-  const totalCountPromise = Product.countDocuments(query)
-  const transactionsPromise = Product.find(query)
+  const totalCountPromise = ProductTransaction.countDocuments(query)
+  const transactionsPromise = ProductTransaction.find(query)
     .skip((page - 1) * perPage)
     .limit(perPage)
 
@@ -38,18 +38,3 @@ async function getAllTransactions(searchText, month, page, perPage) {
 module.exports = {
   getAllTransactions,
 }
-
-
-// try {
-//   const { page = 1, perPage = 10, search = '' } = req.query;
-
-//   let query = {};
-//   if (search) {
-//     if (!isNaN(search)) {
-//       // Search in the price column if the search input is a number
-//       query = { price: parseFloat(search) };
-//     } else {
-//       // Search in the title and description columns if the search input is not a number
-//       query = {
-//         $or: [
-//           { title: { $regex: search, $options: 'i' } },
