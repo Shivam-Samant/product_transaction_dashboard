@@ -65,6 +65,12 @@ This project comprises a backend API and frontend application. The backend initi
     cp .env.example .env
     ```
 
+1. Hit the below endpoint to seed the data in the database
+    ```sh
+    <backend-url>/api/product-transactions/init
+    ```
+    **Note:** The default backend url is `http://localhost:8000`
+
 1. Run the application
     ```sh
     npm run dev
