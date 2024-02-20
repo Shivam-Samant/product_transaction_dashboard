@@ -7,7 +7,11 @@ const StatisticsBox = ({ statisticsData }) => {
       <Grid item sm={3}>
         <Card>
           <CardContent sx={{ color: '#00302d' }}>
-            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+            <Typography
+              sx={{ fontSize: 14 }}
+              color="text.secondary"
+              gutterBottom
+            >
               Total Sale Amount
             </Typography>
             <Typography variant="h5" component="div">
@@ -20,7 +24,11 @@ const StatisticsBox = ({ statisticsData }) => {
       <Grid item sm={3}>
         <Card>
           <CardContent>
-            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+            <Typography
+              sx={{ fontSize: 14 }}
+              color="text.secondary"
+              gutterBottom
+            >
               Total Sold Items
             </Typography>
             <Typography variant="h5" component="div">
@@ -33,7 +41,11 @@ const StatisticsBox = ({ statisticsData }) => {
       <Grid item sm={3}>
         <Card>
           <CardContent>
-            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+            <Typography
+              sx={{ fontSize: 14 }}
+              color="text.secondary"
+              gutterBottom
+            >
               Total UnSold Items
             </Typography>
             <Typography variant="h5" component="div">

@@ -1,36 +1,37 @@
-const Product = require('../models/productModel');
+const Product = require('../models/productModel')
 
 async function getMonthlyStatistics(month) {
-  const [totalSaleAmountResult, totalSoldItems, totalUnSoldItems] = await Promise.all([
-    Product.aggregate([
-      {
-        $match: {
-          $expr: { $eq: [{ $month: '$dateOfSale' }, parseInt(month)] },
-          sold: true,
-        }
-      },
-      {
-        $group: {
-          _id: null,
-          totalAmount: { $sum: '$price' },
+  const [totalSaleAmountResult, totalSoldItems, totalUnSoldItems] =
+    await Promise.all([
+      Product.aggregate([
+        {
+          $match: {
+            $expr: { $eq: [{ $month: '$dateOfSale' }, parseInt(month)] },
+            sold: true,
+          },
         },
-      },
-    ]),
-    Product.countDocuments({
-      $expr: { $eq: [{ $month: '$dateOfSale' }, month] },
-      sold: true,
-    }),
-    Product.countDocuments({
-      $expr: { $eq: [{ $month: '$dateOfSale' }, month] },
-      sold: false,
-    }),
-  ]);
+        {
+          $group: {
+            _id: null,
+            totalAmount: { $sum: '$price' },
+          },
+        },
+      ]),
+      Product.countDocuments({
+        $expr: { $eq: [{ $month: '$dateOfSale' }, month] },
+        sold: true,
+      }),
+      Product.countDocuments({
+        $expr: { $eq: [{ $month: '$dateOfSale' }, month] },
+        sold: false,
+      }),
+    ])
 
-  const totalSaleAmount = totalSaleAmountResult.length > 0 ? totalSaleAmountResult[0].totalAmount : 0;
+  const totalSaleAmount =
+    totalSaleAmountResult.length > 0 ? totalSaleAmountResult[0].totalAmount : 0
 
-  return { totalSaleAmount, totalSoldItems, totalUnSoldItems };
+  return { totalSaleAmount, totalSoldItems, totalUnSoldItems }
 }
-
 
 async function getBarChartData(month) {
   const priceRanges = [
@@ -44,7 +45,7 @@ async function getBarChartData(month) {
     { min: 701, max: 800 },
     { min: 801, max: 900 },
     { min: 901, max: Infinity },
-  ];
+  ]
 
   const barChartData = await Promise.all(
     priceRanges.map(async ({ min, max }) => {
@@ -53,14 +54,13 @@ async function getBarChartData(month) {
           $eq: [{ $month: '$dateOfSale' }, month],
         },
         price: { $gte: min, $lte: max },
-      });
-      range = max == Infinity ? '> 900' : `${min}-${max}`
-      return { range, count };
-    })
-  );
+      })
+      range = max == Infinity ? '901 - above' : `${min}-${max}`
+      return { range, count }
+    }),
+  )
 
-
-  return barChartData;
+  return barChartData
 }
 
 async function getPieChartData(month) {
@@ -83,21 +83,21 @@ async function getPieChartData(month) {
         _id: 0,
       },
     },
-  ]);
+  ])
 
-  return pieChartData;
+  return pieChartData
 }
 
 async function getAllStatistics(month) {
-  const statisticsData = await getMonthlyStatistics(month);
-  const barChartData = await getBarChartData(month);
-  const pieChartData = await getPieChartData(month);
+  const statisticsData = await getMonthlyStatistics(month)
+  const barChartData = await getBarChartData(month)
+  const pieChartData = await getPieChartData(month)
 
   return {
     statisticsData,
     barChartData,
     pieChartData,
-  };
+  }
 }
 
 module.exports = {
@@ -105,4 +105,4 @@ module.exports = {
   getBarChartData,
   getPieChartData,
   getAllStatistics,
-};
+}

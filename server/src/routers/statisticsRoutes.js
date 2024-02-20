@@ -1,5 +1,10 @@
 const express = require('express')
-const { getMonthlyStatistics, getBarChartData, getPieChartData, getAllStatistics } = require('../controllers/statisticsController')
+const {
+  getMonthlyStatistics,
+  getBarChartData,
+  getPieChartData,
+  getAllStatistics,
+} = require('../controllers/statisticsController')
 
 const statisticRouter = express.Router()
 

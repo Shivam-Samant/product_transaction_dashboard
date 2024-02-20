@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
   FormControl,
   InputLabel,
@@ -18,8 +18,8 @@ import {
   Box,
   Button,
   Skeleton,
-} from '@mui/material';
-import { Search } from '@mui/icons-material';
+} from '@mui/material'
+import { Search } from '@mui/icons-material'
 
 const TransactionList = ({
   transactionData,
@@ -34,25 +34,30 @@ const TransactionList = ({
   isLoading,
 }) => {
   const handleMonthChange = (event) => {
-    setMonth(event.target.value);
-  };
+    setMonth(event.target.value)
+  }
 
   const handleSearchChange = (event) => {
-    setSearchText(event.target.value);
-  };
+    setSearchText(event.target.value)
+  }
 
   const handleChangePage = (event, newPage) => {
-    setPage(newPage + 1); // +1 because of 0 base indexing
-  };
+    setPage(newPage + 1) // +1 because of 0 base indexing
+  }
 
   const handleChangeRowsPerPage = (event) => {
-    setPerPage(+event.target.value);
-    setPage(1);
-  };
+    setPerPage(+event.target.value)
+    setPage(1)
+  }
 
   return (
     <Box sx={{ mt: 5 }}>
-      <Grid container spacing={2} justifyContent="space-between" alignItems="center">
+      <Grid
+        container
+        spacing={2}
+        justifyContent="space-between"
+        alignItems="center"
+      >
         <Grid item xs={3}>
           <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
             <InputLabel>Month</InputLabel>
@@ -89,73 +94,121 @@ const TransactionList = ({
         <Table>
           <TableHead>
             <TableRow>
-              {['S. NO.', 'IMAGE', 'TITLE', 'DESCRIPTION', 'CATEGORY', 'PRICE', 'STATUS'].map(cellValue =>
-                <TableCell sx={{ fontWeight: 'bold', color: "#00302d", fontSize: '1rem' }}>{cellValue}</TableCell>
-              )}
+              {[
+                'S. NO.',
+                'IMAGE',
+                'TITLE',
+                'DESCRIPTION',
+                'CATEGORY',
+                'PRICE',
+                'STATUS',
+              ].map((cellValue) => (
+                <TableCell
+                  sx={{
+                    fontWeight: 'bold',
+                    color: '#00302d',
+                    fontSize: '1rem',
+                  }}
+                >
+                  {cellValue}
+                </TableCell>
+              ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            {isLoading ? (
-              Array.from({ length: 5 }).map((_, idx) => (
-                <TableRow key={idx}>
-                  <TableCell>
-                    <Skeleton variant="text" />
-                  </TableCell>
-                  <TableCell>
-                    <Skeleton variant="rectangular" width={100} height={100} />
-                  </TableCell>
-                  <TableCell>
-                    <Skeleton variant="text" />
-                  </TableCell>
-                  <TableCell>
-                    <Skeleton variant="text" />
-                  </TableCell>
-                  <TableCell>
-                    <Skeleton variant="text" />
-                  </TableCell>
-                  <TableCell>
-                    <Skeleton variant="text" />
-                  </TableCell>
-                  <TableCell>
-                    <Skeleton variant="text" />
-                  </TableCell>
-                </TableRow>
-              ))
-            ) : (
-              transactionData?.transactions?.map((transaction, idx) => (
-                <TableRow key={transaction.id}>
-                  <TableCell sx={{ width: '3rem' }}>{((page - 1) * 10) + idx + 1}</TableCell>
-                  <TableCell>
-                    <img src={transaction.image} alt="Product image" height={100} width={100} />
-                  </TableCell>
-                  <TableCell>{transaction.title}</TableCell>
-                  <TableCell>
-                  {/* <Typography sx={{
-                      display: '-webkit-box',
-                      webkitBoxOrient: 'vertical',
-                      webkitLineClamp: 3,
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis'
-                    }}> */}
-                    {transaction.description}
-                  {/* </Typography> */}
-                  </TableCell>
-                  <TableCell>
-                    <Button variant="contained" sx={{ backgroundColor: "#1a6399" }}>{transaction.category}</Button>
-                  </TableCell>
-                  <TableCell>
-                    <Button variant="outlined" color="success" sx={{ width: '6.5rem' }}>₹ {transaction.price.toFixed(2)}</Button>
-                  </TableCell>
-                  <TableCell>
-                    {transaction.sold ? (
-                      <Button variant="contained" color="success" sx={{ width: '5rem' }}>Sold</Button>
-                    ) : (
-                      <Button variant="outlined" color="error" sx={{ width: '5rem' }}>Unsold</Button>
-                    )}
-                  </TableCell>
-                </TableRow>
-              ))
-            )}
+            {isLoading
+              ? Array.from({ length: 5 }).map((_, idx) => (
+                  <TableRow key={idx}>
+                    <TableCell>
+                      <Skeleton variant="text" />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton
+                        variant="rectangular"
+                        width={100}
+                        height={100}
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton variant="text" />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton variant="text" />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton variant="text" />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton variant="text" />
+                    </TableCell>
+                    <TableCell>
+                      <Skeleton variant="text" />
+                    </TableCell>
+                  </TableRow>
+                ))
+              : transactionData?.transactions?.map((transaction, idx) => (
+                  <TableRow key={transaction.id}>
+                    <TableCell sx={{ width: '3rem' }}>
+                      {(page - 1) * 10 + idx + 1}
+                    </TableCell>
+                    <TableCell>
+                      <img
+                        src={transaction.image}
+                        alt="Product image"
+                        height={100}
+                        width={100}
+                      />
+                    </TableCell>
+                    <TableCell>{transaction.title}</TableCell>
+                    <TableCell>
+                      <Typography sx={{
+                        display: '-webkit-box',
+                        overflow: 'hidden',
+                        '-webkit-line-clamp': '3',
+                        '-webkit-box-orient': 'vertical',
+                        textOverflow: 'ellipsis',
+                      }}>
+                      {transaction.description}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Button
+                        variant="contained"
+                        sx={{ backgroundColor: '#1a6399' }}
+                      >
+                        {transaction.category}
+                      </Button>
+                    </TableCell>
+                    <TableCell>
+                      <Button
+                        variant="outlined"
+                        color="success"
+                        sx={{ width: '6.5rem' }}
+                      >
+                        ₹ {transaction.price.toFixed(2)}
+                      </Button>
+                    </TableCell>
+                    <TableCell>
+                      {transaction.sold ? (
+                        <Button
+                          variant="contained"
+                          color="success"
+                          sx={{ width: '5rem' }}
+                        >
+                          Sold
+                        </Button>
+                      ) : (
+                        <Button
+                          variant="outlined"
+                          color="error"
+                          sx={{ width: '5rem' }}
+                        >
+                          Unsold
+                        </Button>
+                      )}
+                    </TableCell>
+                  </TableRow>
+                ))}
           </TableBody>
         </Table>
       </TableContainer>
@@ -170,7 +223,7 @@ const TransactionList = ({
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Box>
-  );
-};
+  )
+}
 
-export default TransactionList;
+export default TransactionList

@@ -21,3 +21,12 @@ export const getBarChartData = async (month) => {
     throw err
   }
 }
+
+export const getPieChartData = async (month) => {
+  try {
+    const response = await axios.get(`/statistics/pie-chart/${month}`)
+    return response.data
+  } catch (err) {
+    throw err
+  }
+}

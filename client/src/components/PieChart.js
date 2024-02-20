@@ -1,18 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { PieChart as Chart } from '@mui/x-charts';
+import React, { useEffect, useState } from 'react'
+import { PieChart as Chart } from '@mui/x-charts'
 
 const PieChart = ({ pieChartData }) => {
-  const [chartData, setChartData] = useState([]);
+  const [chartData, setChartData] = useState([])
 
   useEffect(() => {
     if (pieChartData) {
-      const transformedData = pieChartData.map(data => ({
-        range: data.range,
-        count: data.count,
-      }));
-      setChartData(transformedData);
+      const transformedData = pieChartData.map((data, idx) => ({
+        id: idx,
+        value: data.count,
+        label: (data.category).toLowerCase()
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' '),
+      }))
+      setChartData(transformedData)
     }
-  }, [pieChartData]);
+  }, [pieChartData])
 
   if (!chartData || chartData.length === 0) {
     return null
@@ -20,13 +24,27 @@ const PieChart = ({ pieChartData }) => {
 
   return (
     <Chart
-      dataset={chartData}
-      series={[{ dataKey: 'count' }]}
-      height={290}
-      xAxis={[{ dataKey: 'range', scaleType: 'band' }]}
-      margin={{ top: 10, bottom: 30, left: 40, right: 10 }}
+      series={[
+        {
+          data: chartData,
+          innerRadius: 30,
+          outerRadius: 100,
+          paddingAngle: 5,
+          cornerRadius: 5,
+          startAngle: -90,
+          endAngle: 180,
+          cx: 150,
+          cy: 150,
+          highlightScope: { faded: 'global', highlighted: 'item' },
+          faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
+          arcLabel: (item) => item.value,
+          arcLabelMinAngle: 45,
+        },
+      ]}
+      width={500}
+      height={400}
     />
-  );
-};
+  )
+}
 
-export default PieChart;
+export default PieChart

@@ -7,7 +7,7 @@ export const getAll = async (month, searchText, page, perPage) => {
         month,
         searchText,
         page,
-        perPage
+        perPage,
       },
     })
     return response.data

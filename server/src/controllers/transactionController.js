@@ -4,7 +4,7 @@ const constants = require('../utils/constants')
 async function getAllTransactions(req, res) {
   try {
     const {
-      searchText='',
+      searchText = '',
       month,
       page = constants.DEFAULT_PAGE,
       perPage = constants.DEFAULT_PER_PAGE,
